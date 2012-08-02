@@ -1,0 +1,46 @@
+# query example
+# http://www.worldweatheronline.com/premium-weather.aspx?menu=historical
+
+settings:
+    # sets the mode, either free or premium, premium
+    # allows for more data to be pulled.
+    # If the keys are set in the query section then those
+    # keys are used, otherwise keys should be set in
+    #   configs/keys.yaml
+    # as:
+    #  free:
+    #   key: KEYVAL
+    #  premium:
+    #   key: KEYVAL
+    #   feedkey: FEEDKEYVAL (Optional)
+    mode: free
+    #mode: premium
+    dates:
+        # this is the date format of the date range that is defined here
+        # we need to understand how the date string looks in order to interpret it.
+        format : '%m-%d-%Y'
+        #from   : 1-1-2012
+        to    : now
+    format: json
+    # use number of days (get a large query at once), or not which
+    # really means use each day in the day range individually
+    num_of_days: no
+
+# how the output, in this case the csv, is defined. If the
+# name is not defined, then default name of the output file
+# is the config file.
+output:
+    type: csv
+    name: example
+
+# this part of the yaml represents the queries that are
+# being passed to the web API, these query items are
+# basically the same fields that will be found
+# at (the premium example);
+#   http://www.worldweatheronline.com/premium-weather.aspx?menu=historical
+
+q:
+    - New York,New York
+    - Los Angeles,California
+    - Chicago,Illinois
+    - Houston,Texas

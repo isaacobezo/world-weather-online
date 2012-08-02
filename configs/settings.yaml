@@ -1,0 +1,85 @@
+# configurations and settings for the world-online tool
+# default configs
+settings:
+    # default settings specific to queries
+    format  : json
+    dates   :
+        format : '%m-%d-%Y'
+        from   :
+        to     : now
+
+    # datetime output format
+    date format: '%Y-%m-%d'
+    # api settings
+    api  : weather
+    mode : free
+    num_of_days: yes
+
+# default output type, it defaults to CSV with
+# and using the name of the query file (unless
+# the file is specified in the query settings)
+output:
+    type: csv
+
+# maximum results that can be pulled per time unit.
+results:
+    premium:
+        count: 100000
+        time: month
+
+# base urls
+urls:
+    free:
+        base: 'http://free.worldweatheronline.com/'
+    premium:
+        base: 'http://www.worldweatheronline.com/'
+        apis:
+            weather  : feed/premium-weather-v2.ashx
+    apis:
+        weather  : feed/weather.ashx
+        usage    : api-usage-api.ashx
+        timezone : feed/tz.ashx
+        location : feed/search.ashx
+
+# the APIs keys that are passed with the query
+# if the key is not included in within the setting it is dropped
+# from the query string
+columns:
+    default:
+        weather:
+            - key
+            - q
+            - format
+            - num_of_days
+            - date
+        usage:
+            - key
+            - format
+            - callback
+        timezone:
+            - q
+            - format
+            - callback
+            - key
+        location:
+            - timezone
+            - popular
+            - query
+            - num_of_results
+            - format
+            - key
+    premium:
+        # http://www.worldweatheronline.com/premium-weather.aspx?menu=city
+        weather:
+            - feedkey
+            - extra # values are
+                    #   isDayTime
+                    #   utcDateTime
+                    #   localObsTime
+            - fx
+            - cc
+            - includeLocation
+            - feedkey
+            - isDayTime
+            - utcDateTime
+            - localObsTime
